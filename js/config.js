@@ -16,7 +16,7 @@ const DEFAULTS = {
     CONTACT_LOCATION: "Banyumas, Indonesia",
     CONTACT_GITHUB: "https://github.com/rasiharunart1",
     CONTACT_LINKEDIN: "https://www.linkedin.com/in/harunart",
-    CONTACT_INSTAGRAM: "https://instagram.com/harunart",
+    CONTACT_INSTAGRAM: "https://instagram.com/rasiharunart",
     LINK_DOWNLOAD_CV: "#",
     IMAGE_LOGO: "",
     IMAGE_HERO_BG: "",
