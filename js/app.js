@@ -283,8 +283,8 @@ function getMediaEmbed(project) {
         };
     }
 
-    // 2. Instagram Post / Reel
-    const igReg = /(?:instagram\.com)\/(?:p|reel)\/([^/?#&]+)/i;
+    // 2. Instagram Post / Reel (Supports urls with or without profile username)
+    const igReg = /(?:instagram\.com)\/(?:[a-zA-Z0-9_.]+\/)?(?:p|reel)\/([^/?#&]+)/i;
     const igMatch = url.match(igReg);
     if (igMatch) {
         const postId = igMatch[1];
