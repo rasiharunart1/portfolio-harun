@@ -94,6 +94,14 @@ window.PortfolioConfig = {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
             const text = await response.text();
+            
+            // Clear default fallback project keys since a custom .env is successfully loaded
+            for (let key in this.env) {
+                if (key.startsWith('PROJECT_')) {
+                    delete this.env[key];
+                }
+            }
+
             this.parseEnv(text);
             this.isLocalEnvLoaded = true;
             console.log("Environment variables (.env) loaded successfully!");
