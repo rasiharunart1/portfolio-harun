@@ -31,6 +31,9 @@ const DEFAULTS = {
     PROJECT_1_TAGS: "Raspberry Pi 5, YOLO, Python, OpenCV",
     PROJECT_1_URL: "https://github.com/rasiharunart1",
     PROJECT_1_IMAGE: "assets/images/projects/project1.jpg",
+    PROJECT_1_VIDEO: "https://www.youtube.com/watch?v=_iWeQHDD3XY",
+    PROJECT_1_GITHUB: "https://github.com/rasiharunart1",
+    PROJECT_1_DEMO: "",
 
     // Proyek 2
     PROJECT_2_ACTIVE: "true",
@@ -40,7 +43,10 @@ const DEFAULTS = {
     PROJECT_2_DESC: "Intelligent traffic monitoring pipeline using OpenCV and YOLO on live CCTV footage. Enables data-driven congestion analysis and urban planning for Banyumas city government.",
     PROJECT_2_TAGS: "OpenCV, YOLO, Python",
     PROJECT_2_URL: "https://github.com/rasiharunart1",
-    PROJECT_2_IMAGE: "assets/images/projects/project2.jpg",
+    PROJECT_2_IMAGE: "assets/images/projects/project2.png",
+    PROJECT_2_VIDEO: "",
+    PROJECT_2_GITHUB: "https://github.com/rasiharunart1",
+    PROJECT_2_DEMO: "https://github.com/rasiharunart1",
 
     // Proyek 3
     PROJECT_3_ACTIVE: "true",
@@ -50,10 +56,13 @@ const DEFAULTS = {
     PROJECT_3_DESC: "ESP32-based device that collects real-time audio FFT data and WAV recordings, transmitted via MQTT and HTTPClient to a Laravel web dashboard with alert notifications.",
     PROJECT_3_TAGS: "ESP32, MQTT, Laravel, FFT",
     PROJECT_3_URL: "https://github.com/rasiharunart1",
-    PROJECT_3_IMAGE: "assets/images/projects/project3.jpg",
+    PROJECT_3_IMAGE: "https://www.instagram.com/p/CG4tYpXnVzW/",
+    PROJECT_3_VIDEO: "",
+    PROJECT_3_GITHUB: "https://github.com/rasiharunart1/noisemoniot.git",
+    PROJECT_3_DEMO: "",
 
-    // Proyek 4
-    PROJECT_4_ACTIVE: "true",
+    // Proyek 4 (Dihilangkan/Non-Aktif)
+    PROJECT_4_ACTIVE: "false",
     PROJECT_4_CAT: "IoT • Smart Home",
     PROJECT_4_STATUS: "active",
     PROJECT_4_TITLE: "Serverless Smart Home System",
@@ -61,6 +70,9 @@ const DEFAULTS = {
     PROJECT_4_TAGS: "ESP32, MQTT, RF 433MHz, Solar PV",
     PROJECT_4_URL: "https://github.com/rasiharunart1",
     PROJECT_4_IMAGE: "assets/images/projects/project4.jpg",
+    PROJECT_4_VIDEO: "",
+    PROJECT_4_GITHUB: "https://github.com/rasiharunart1",
+    PROJECT_4_DEMO: "",
 
     // Proyek 5
     PROJECT_5_ACTIVE: "true",
@@ -70,7 +82,10 @@ const DEFAULTS = {
     PROJECT_5_DESC: "PKM-KC 2024: automated package receiving box for COD deliveries, powered by a 50Wp solar panel and secured via RFID and barcode scanner. Registered intellectual property.",
     PROJECT_5_TAGS: "ESP32, Arduino Nano, RFID, Solar 50Wp",
     PROJECT_5_URL: "https://github.com/rasiharunart1",
-    PROJECT_5_IMAGE: "assets/images/projects/project5.jpg",
+    PROJECT_5_IMAGE: "https://www.instagram.com/cobox.paketin/reel/C-9jVMoy5Lv/",
+    PROJECT_5_VIDEO: "",
+    PROJECT_5_GITHUB: "https://github.com/rasiharunart1",
+    PROJECT_5_DEMO: "https://github.com/rasiharunart1",
 
     // Proyek 6
     PROJECT_6_ACTIVE: "true",
@@ -80,7 +95,10 @@ const DEFAULTS = {
     PROJECT_6_DESC: "ESP32 system for real-time temperature and humidity monitoring in coffee drying environments, with a web dashboard for remote control, alerts, and historical data logging.",
     PROJECT_6_TAGS: "ESP32, DHT Sensor, Web Dashboard",
     PROJECT_6_URL: "https://github.com/rasiharunart1",
-    PROJECT_6_IMAGE: "assets/images/projects/project6.jpg"
+    PROJECT_6_IMAGE: "assets/images/projects/project6.JPG",
+    PROJECT_6_VIDEO: "https://www.youtube.com/shorts/KLD5msSkhDU",
+    PROJECT_6_GITHUB: "https://github.com/rasiharunart1",
+    PROJECT_6_DEMO: ""
 };
 
 window.PortfolioConfig = {
