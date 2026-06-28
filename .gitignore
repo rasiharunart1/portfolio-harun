@@ -1,0 +1,9 @@
+# Local environment files
+.env
+.env.local
+
+# Operating System files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
