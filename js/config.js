@@ -147,9 +147,9 @@ window.PortfolioConfig = {
     // Utility to get all projects parsed as structured objects
     getProjects() {
         const projects = [];
-        let index = 1;
-        while (true) {
-                        const activeKey = `PROJECT_${index}_ACTIVE`;
+        // Scan up to 50 projects to allow skipping/commenting out indices
+        for (let index = 1; index <= 50; index++) {
+            const activeKey = `PROJECT_${index}_ACTIVE`;
             const titleKey = `PROJECT_${index}_TITLE`;
             const catKey = `PROJECT_${index}_CAT`;
             const statusKey = `PROJECT_${index}_STATUS`;
@@ -161,9 +161,9 @@ window.PortfolioConfig = {
             const githubKey = `PROJECT_${index}_GITHUB`;
             const demoKey = `PROJECT_${index}_DEMO`;
 
-            // If there's no title for this project index, stop checking
+            // Skip if there's no title for this project index (e.g. commented out)
             if (this.env[titleKey] === undefined) {
-                break;
+                continue;
             }
 
             const isActive = this.env[activeKey] !== "false";
@@ -183,7 +183,6 @@ window.PortfolioConfig = {
                     demo: this.env[demoKey] || ""
                 });
             }
-            index++;
         }
         return projects;
     }
