@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     // 3. Initialize dynamic UI interactions & scroll animations
     initMenuInteractions();
     initScrollAnimations();
+    initMotionEnhancements();
 });
 
 /**
@@ -141,6 +142,8 @@ function renderProjects() {
     projects.forEach((project, idx) => {
         const card = document.createElement('div');
         card.className = `project-card fade-up d${(idx % 3) + 1}`;
+        card.setAttribute('data-aos', 'zoom-in-up');
+        card.setAttribute('data-aos-delay', String((idx % 3) * 80));
 
                 // Dynamic Tag HTML list
         const tagsHTML = project.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
@@ -198,6 +201,12 @@ function renderProjects() {
         `;
         container.appendChild(card);
     });
+
+    if (window.AOS && typeof window.AOS.refreshHard === "function") {
+        window.AOS.refreshHard();
+    }
+
+    initTiltEffects();
 }
 // Inject styled CSS for video thumbnails and play overlays dynamically
 const videoStyle = document.createElement('style');
@@ -472,4 +481,88 @@ function initScrollAnimations() {
     fadeElements.forEach(el => {
         scrollObserver.observe(el);
     });
+}
+
+/**
+ * Initializes third-party and custom motion enhancements safely.
+ */
+function initMotionEnhancements() {
+    initAOS();
+    initTiltEffects();
+    initPointerParallax();
+}
+
+/**
+ * Initializes AOS if loaded and user does not prefer reduced motion.
+ */
+function initAOS() {
+    if (!window.AOS || prefersReducedMotion()) return;
+
+    window.AOS.init({
+        duration: 700,
+        once: true,
+        offset: 70,
+        easing: "ease-out-cubic"
+    });
+}
+
+/**
+ * Initializes VanillaTilt on actual card selectors in this repository.
+ */
+function initTiltEffects() {
+    if (!window.VanillaTilt || prefersReducedMotion()) return;
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    const tiltTargets = document.querySelectorAll('.project-card, .skill-card, .about-card, .edu-card, .ach-card');
+    const newTargets = Array.from(tiltTargets).filter((el) => !el.vanillaTilt);
+    if (!newTargets.length) return;
+
+    window.VanillaTilt.init(newTargets, {
+        max: 8,
+        speed: 350,
+        perspective: 900,
+        glare: true,
+        "max-glare": 0.12,
+        scale: 1.01
+    });
+}
+
+/**
+ * Lightweight pointer-driven background motion.
+ */
+function initPointerParallax() {
+    if (prefersReducedMotion()) return;
+    if (!window.matchMedia('(pointer: fine)').matches) return;
+
+    const root = document.documentElement;
+    let rafId = null;
+
+    const onPointerMove = (event) => {
+        if (rafId) return;
+        rafId = window.requestAnimationFrame(() => {
+            const x = (event.clientX / window.innerWidth) * 100;
+            const y = (event.clientY / window.innerHeight) * 100;
+            const offsetX = ((x - 50) / 50) * 12;
+            const offsetY = ((y - 50) / 50) * 12;
+            root.style.setProperty('--pointer-x', `${x}%`);
+            root.style.setProperty('--pointer-y', `${y}%`);
+            root.style.setProperty('--bg-float-x', `${offsetX}px`);
+            root.style.setProperty('--bg-float-y', `${offsetY}px`);
+            rafId = null;
+        });
+    };
+
+    const onPointerLeave = () => {
+        root.style.setProperty('--pointer-x', '50%');
+        root.style.setProperty('--pointer-y', '50%');
+        root.style.setProperty('--bg-float-x', '0px');
+        root.style.setProperty('--bg-float-y', '0px');
+    };
+
+    window.addEventListener('pointermove', onPointerMove, { passive: true });
+    window.addEventListener('pointerleave', onPointerLeave, { passive: true });
+}
+
+function prefersReducedMotion() {
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
