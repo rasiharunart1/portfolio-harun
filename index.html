@@ -12,6 +12,7 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
         rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <style>
         /* =============================================
    DESIGN TOKENS
@@ -33,6 +34,10 @@
             --shadow: 0 4px 16px rgba(43, 41, 38, .08), 0 1px 4px rgba(43, 41, 38, .05);
             --shadow-lg: 0 12px 40px rgba(43, 41, 38, .10), 0 4px 12px rgba(43, 41, 38, .06);
             --transition: 260ms cubic-bezier(.4, 0, .2, 1);
+            --pointer-x: 50%;
+            --pointer-y: 50%;
+            --bg-float-x: 0px;
+            --bg-float-y: 0px;
         }
 
         /* =============================================
@@ -53,10 +58,27 @@
 
         body {
             font-family: var(--font);
-            background: var(--bg);
+            background:
+                radial-gradient(800px circle at calc(var(--pointer-x) + var(--bg-float-x)) calc(var(--pointer-y) + var(--bg-float-y)), rgba(184, 116, 60, .10), transparent 55%),
+                radial-gradient(600px circle at 14% 14%, rgba(184, 116, 60, .08), transparent 60%),
+                var(--bg);
             color: var(--text-1);
             line-height: 1.65;
             overflow-x: hidden;
+            position: relative;
+            isolation: isolate;
+            transition: background-position 320ms ease-out;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(400px circle at var(--pointer-x) var(--pointer-y), rgba(255, 255, 255, .18), transparent 70%);
+            opacity: .6;
+            transition: opacity 300ms ease;
         }
 
         img {
@@ -507,11 +529,14 @@
             display: flex;
             gap: 14px;
             align-items: flex-start;
-            transition: box-shadow var(--transition);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            transform-style: preserve-3d;
+            will-change: transform;
         }
 
         .about-card:hover {
             box-shadow: var(--shadow);
+            border-color: rgba(184, 116, 60, .35);
         }
 
         .about-card-icon {
@@ -553,12 +578,15 @@
             border-radius: var(--radius);
             padding: 26px;
             box-shadow: var(--shadow-sm);
-            transition: all var(--transition);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            transform-style: preserve-3d;
+            will-change: transform;
         }
 
         .skill-card:hover {
             box-shadow: var(--shadow);
             transform: translateY(-2px);
+            border-color: rgba(184, 116, 60, .35);
         }
 
         .skill-icon {
@@ -712,14 +740,17 @@
             border-radius: var(--radius);
             overflow: hidden;
             box-shadow: var(--shadow-sm);
-            transition: all var(--transition);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
             display: flex;
             flex-direction: column;
+            transform-style: preserve-3d;
+            will-change: transform;
         }
 
         .project-card:hover {
             box-shadow: var(--shadow-lg);
             transform: translateY(-3px);
+            border-color: rgba(184, 116, 60, .35);
         }
 
         .project-img {
@@ -889,11 +920,15 @@
             box-shadow: var(--shadow-sm);
             position: relative;
             overflow: hidden;
-            transition: box-shadow var(--transition);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            transform-style: preserve-3d;
+            will-change: transform;
         }
 
         .edu-card:hover {
             box-shadow: var(--shadow);
+            transform: translateY(-2px);
+            border-color: rgba(184, 116, 60, .35);
         }
 
         .edu-card::before {
@@ -1022,11 +1057,15 @@
             display: flex;
             gap: 16px;
             align-items: flex-start;
-            transition: box-shadow var(--transition);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            transform-style: preserve-3d;
+            will-change: transform;
         }
 
         .ach-card:hover {
             box-shadow: var(--shadow);
+            transform: translateY(-2px);
+            border-color: rgba(184, 116, 60, .35);
         }
 
         .ach-icon {
@@ -1090,7 +1129,9 @@
             border-radius: var(--radius-sm);
             padding: 16px 18px;
             box-shadow: var(--shadow-sm);
-            transition: all var(--transition);
+            transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+            transform-style: preserve-3d;
+            will-change: transform;
         }
 
         .contact-item:hover {
@@ -1311,6 +1352,10 @@
             transform: translateY(0);
         }
 
+        [data-aos] {
+            backface-visibility: hidden;
+        }
+
         .d1 {
             transition-delay: 70ms;
         }
@@ -1393,6 +1438,32 @@
                 align-items: flex-start;
             }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+
+            .fade-up {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            [data-aos] {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            body::before {
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 
@@ -1417,7 +1488,7 @@
     </nav>
 
     <!-- HERO -->
-    <section style="border:none; padding:0;">
+    <section style="border:none; padding:0;" data-aos="fade-up">
         <div class="container hero-wrap">
             <!-- LEFT -->
             <div class="hero-left">
@@ -1494,7 +1565,7 @@
     </section>
 
     <!-- ABOUT -->
-    <section id="about" class="section">
+    <section id="about" class="section" data-aos="fade-up">
         <div class="container">
             <div class="about-grid">
                 <div class="fade-up">
@@ -1516,7 +1587,7 @@
                     </div>
                 </div>
                 <div class="about-cards fade-up d2">
-                    <div class="about-card">
+                    <div class="about-card" data-aos="zoom-in-up">
                         <div class="about-card-icon"><i class="fa-solid fa-microchip"></i></div>
                         <div>
                             <h3>Hardware-first mindset</h3>
@@ -1524,7 +1595,7 @@
                                 pure software engineers overlook.</p>
                         </div>
                     </div>
-                    <div class="about-card">
+                    <div class="about-card" data-aos="zoom-in-up" data-aos-delay="80">
                         <div class="about-card-icon"><i class="fa-solid fa-eye"></i></div>
                         <div>
                             <h3>Vision &amp; Intelligence</h3>
@@ -1532,7 +1603,7 @@
                                 tasks at production scale.</p>
                         </div>
                     </div>
-                    <div class="about-card">
+                    <div class="about-card" data-aos="zoom-in-up" data-aos-delay="140">
                         <div class="about-card-icon"><i class="fa-solid fa-layer-group"></i></div>
                         <div>
                             <h3>Full-stack IoT</h3>
@@ -1540,7 +1611,7 @@
                                 not just one layer.</p>
                         </div>
                     </div>
-                    <div class="about-card">
+                    <div class="about-card" data-aos="zoom-in-up" data-aos-delay="200">
                         <div class="about-card-icon"><i class="fa-solid fa-location-dot"></i></div>
                         <div>
                             <h3>Based in Banyumas, Indonesia</h3>
@@ -1554,7 +1625,7 @@
     </section>
 
     <!-- SKILLS -->
-    <section id="skills" class="section">
+    <section id="skills" class="section" data-aos="fade-up">
         <div class="container">
             <div class="fade-up">
                 <p class="eyebrow">Capabilities</p>
@@ -1639,7 +1710,7 @@
     </section>
 
     <!-- EXPERIENCE -->
-    <section id="experience" class="section">
+    <section id="experience" class="section" data-aos="fade-up">
         <div class="container">
             <div class="fade-up">
                 <p class="eyebrow">Work History</p>
@@ -1723,7 +1794,7 @@
     </section>
 
     <!-- PROJECTS -->
-    <section id="projects" class="section">
+    <section id="projects" class="section" data-aos="fade-up">
         <div class="container">
             <div class="fade-up">
                 <p class="eyebrow">Featured Work</p>
@@ -1743,7 +1814,7 @@
     </section>
 
     <!-- EDUCATION -->
-    <section id="education" class="section">
+    <section id="education" class="section" data-aos="fade-up">
         <div class="container">
             <div class="fade-up">
                 <p class="eyebrow">Academic Background</p>
@@ -1812,7 +1883,7 @@
     </section> -->
 
     <!-- ACHIEVEMENTS -->
-    <section id="achievements" class="section">
+    <section id="achievements" class="section" data-aos="fade-up">
         <div class="container">
             <div class="fade-up">
                 <p class="eyebrow">Recognition</p>
@@ -1871,7 +1942,7 @@
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section">
+    <section id="contact" class="section" data-aos="fade-up">
         <div class="container">
             <div class="fade-up">
                 <p class="eyebrow">Get in touch</p>
@@ -1962,6 +2033,8 @@
 
     <!-- Scripts -->
     <script src="js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.8.1/dist/vanilla-tilt.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="js/app.js"></script>
 </body>
 
