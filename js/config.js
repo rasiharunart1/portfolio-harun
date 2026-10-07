@@ -17,7 +17,7 @@ const SITE_CONFIG = {
     name: "Harun Ar Rasyid",
     shortName: "HARUN.AR",
     role: "Engineer IoT & Computer Vision",
-    idCode: "NIM: 2211102080",
+    idCode: "",
     fieldDossierCode: "Profil Rekayasa // HR-01",
     location: "Banyumas, Jawa Tengah, Indonesia",
     locationShort: "Banyumas, ID",
