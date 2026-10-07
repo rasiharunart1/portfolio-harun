@@ -7,3 +7,8 @@ Thumbs.db
 ehthumbs.db
 Desktop.ini
 .DS_Store
+
+# Temporary browser profiles and testing artifacts
+.edge-responsive-profile/
+.qa-responsive.mjs
+
